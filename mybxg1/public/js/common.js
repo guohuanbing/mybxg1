@@ -36,4 +36,3 @@ define(['jquery','template','cookie'], function ($,template) {
   //$('.aside .profile img').attr('src',loginInfo.tc_avatar);
   //$('.aside .profile h4').html(loginInfo.tc_name);
 });
-
