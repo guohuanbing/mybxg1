@@ -1,4 +1,4 @@
-define(['jquery','template','uploadify'], function ($,template) {
+define(['jquery','template','ckeditor','uploadify','region','datepicker','language'], function ($,template,CKEDITOR) {
   $.ajax({
     type:'get',
     url:'/api/teacher/profile',
@@ -22,6 +22,15 @@ define(['jquery','template','uploadify'], function ($,template) {
           $(".preview img").attr('src',obj.result.path);
         }
       });
+
+      //省市区三级联动插件
+      $("#pcd").region({
+        url:'/public/assets/jquery-region/region.json'
+      })
+
+
+      //处理富文本
+      CKEDITOR.replace('editor')
     }
   });
 });
