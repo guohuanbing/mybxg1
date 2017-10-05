@@ -1,4 +1,4 @@
-define(['jquery','template','util'], function ($,template,util) {
+define(['jquery','template','util','validate','form'], function ($,template,util) {
   util.setMenu('/course/add');
   //获取地址栏中的课程ID
   var csId = util.qs('cs_id');
@@ -36,6 +36,23 @@ define(['jquery','template','util'], function ($,template,util) {
             $("#secondType").html(html)
           }
         })
+      })
+
+      //处理表单提交
+      $("#basicForm").validate({
+        sendForm:false,
+        valid: function () {
+          $(this).ajaxSubmit({
+            type:'post',
+            url:'/api/course/update/basic',
+            data:{cs_id:csId},
+            dataType:'json',
+            success: function (data) {
+              console.log(data)
+              location.href = '/course/picture?cs_id='+data.result.cs_id;
+            }
+          })
+        }
       })
     }
   })
