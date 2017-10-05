@@ -29,10 +29,16 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
           //console.log(data)
           var obj = JSON.parse(data)
           $(".preview img").attr('src', obj.result.path)
-          location.render
+          cropImage();
+          $("#cropBtn").text('保存图片').attr('data-flag',true)
+          //location.render()
         }
       });
+
+
       var img = $(".preview img");
+
+      var nowCrop = null;
       //图片裁切
       $("#cropBtn").click(function () {
         var flag = $(this).attr('data-flag');
@@ -61,6 +67,8 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
         img.Jcrop({
           aspectRatio: 2,
         }, function () {
+          nowCrop && nowCrop.destroy();
+          nowCrop = this;
           //缩略图
           this.initComponent('Thumbnailer', {width: 240, height: 120,mythumb:'.thumb'});
 
