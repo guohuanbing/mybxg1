@@ -26,8 +26,10 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
         fileObjName: 'cs_cover_original',
         formData: {cs_id: csId},
         onUploadSuccess: function (a, data) {
-          //console.log(data)
-          var obj = JSON.parse(data)
+          console.log(data)
+          var obj = JSON.parse(data.trim())
+          console.log(obj)
+          console.log(obj)
           $(".preview img").attr('src', obj.result.path)
           cropImage();
           $("#cropBtn").text('保存图片').attr('data-flag',true)
@@ -84,6 +86,13 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
           //创建选区
           this.newSelection();
           this.setSelect([x,y,w,h]);
+
+          //设置缩略图位置
+          $(".jcrop-thumb").css({
+            position:'absolute',
+            top:0,
+            left:0
+          })
         });
 
       }
